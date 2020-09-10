@@ -1,5 +1,6 @@
 <div class="container">
-    <form action="">
+    <form id="upload" method="post" action="/products/{{ Auth::user()->id }}" enctype="multipart/form-data">
+        @csrf
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -11,8 +12,8 @@
 
             <tbody>
                 <tr>
-                    <td><input type="file" name="image[]" class="form-control-file"></td>
-                    <td><input type="text" name="quantity[]" class="form-control"></td>
+                    <td><input type="file" name="image[]" multiple class="form-control-file"></td>
+                    <td><input type="text" name="quantity[]" multiple class="form-control"></td>
                     <td style="text-align: center"><a href="#" class="btn btn-danger removeRow text-white font-weight-bold">-</a></td>
                 </tr>
             </tbody>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Product;
 
+use App\Live;
 class ProductController extends Controller
 {
     public function insert(Request $request) {
@@ -26,9 +27,10 @@ class ProductController extends Controller
             $key[0]->move('uploads/images/', $fileName);
             $product->image = $fileName;
 
+            $product->live_id = Live::orderByDesc('id')->first()->id;
+
             $product->save();
         }
-
-        return redirect('/')->with('Your order is done');
+        return redirect('/')->with('status', 'Your order is Done!');
     }
 }

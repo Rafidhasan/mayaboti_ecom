@@ -11,4 +11,8 @@ class Product extends Model
     ];
 
     protected $casts = ['image' => 'array'];
+
+    public function lives() {
+        return $this->hasMany(Live::class)->withTimeStamps();
+    }
 }

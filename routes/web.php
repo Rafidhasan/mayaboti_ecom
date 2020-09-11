@@ -17,9 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//admin routes
+Route::get('/admin', 'AdminController@index')->middleware('admin')->name('adminHome');
+Route::post('/live_start', 'LiveController@create')->middleware('admin');
+Route::get('/lives', 'LiveController@index')->middleware('admin')->name('live_list');
+Route::get('/lives/{id}', 'LiveController@show')->middleware('admin')->name('live_list');
+Route::get('/order_confirm/{id}', 'OrderController@show')->middleware('admin')->name('singleOrderPage');
+
+
+//user routes
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::post('/products/{id}', 'ProductController@insert');
 

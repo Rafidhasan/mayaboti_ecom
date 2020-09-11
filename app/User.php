@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)->withTimeStamps();
+    }
+
+    public function getAcessAbilityId() {
+        return $this->roles->map->abilities->flatten()->pluck('id')->first();
+    }
 }

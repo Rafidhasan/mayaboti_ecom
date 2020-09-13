@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Live;
-
 use App\Product;
-
+use App\User;
 use DB;
 
 class LiveController extends Controller
@@ -51,6 +50,15 @@ class LiveController extends Controller
             'products_live' => $products_live,
             'products_user' => $products_user,
             'live_name' => $live_name
+        ]);
+    }
+
+    public function search(Request $request) {
+        $text = $request->input('query');
+        $products = User::where('name', 'LIKE', '%'.$text.'%')->get();
+
+        return view('admin.live.products.search', [
+            'products' => $products
         ]);
     }
 }

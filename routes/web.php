@@ -23,6 +23,7 @@ Route::post('/live_start', 'LiveController@create')->middleware('admin');
 Route::get('/lives', 'LiveController@index')->middleware('admin')->name('live_list');
 Route::get('/lives/{id}', 'LiveController@show')->middleware('admin')->name('live_list');
 Route::get('/order_confirm/{id}', 'OrderController@show')->middleware('admin')->name('singleOrderPage');
+Route::get('/search', 'LiveController@search')->middleware('admin');
 
 
 //user routes

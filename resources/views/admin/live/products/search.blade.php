@@ -11,7 +11,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-4">
-                    Products under <strong>{{ $live_name->name }}</strong>
+                    Search List
                 </div>
                 <div class="col-md-4">
                     <form action="/search" method="get" class="form-inline">
@@ -42,23 +42,19 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($products_user as $product)
+                    @foreach ($products as $product)
                         <tr>
                             <td>{{$product->name}}</td>
                             <td>{{$product->phone_number}}</td>
                             <td>{{$product->url}}</td>
                             <td>
-                                <img src="{{ asset('storage/images/'.trim($product->image, '"')) }}" height="100px" width="100px" alt="">
+                                <img src="{{ asset('uploads/images/' . $product->image) }}" height="100px" width="100px" alt="product image">
                             </td>
                             <td>{{$product->quantity}}</td>
                             <td>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="/order_confirm/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="confirmDeleteModal">Delete</button>
-                                    </div>
+                                    <div class="col-md-6"><a href="/order_confirm/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a></div>
+                                    <div class="col-md-6"><a href="/delete/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a></div>
                                 </div>
                             </td>
                         </tr>
@@ -68,25 +64,4 @@
         </div>
     </div>
 </div>
-
-<!--Modal-->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection

@@ -11,7 +11,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-4">
-                    Products under <strong>{{ $live_name->name }}</strong>
+                    @if($live_name) Products under <strong>{{ $live_name->name }}</strong> @else Products under Live @endif
                 </div>
                 <div class="col-md-4">
                     <form action="/search" method="get" class="form-inline">
@@ -54,10 +54,10 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="/order_confirm/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a>
+                                        <a href="/order_confirm/{{ $product->user_id }}/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="confirmDeleteModal">Delete</button>
+                                    <a href="/delete/{{ $product->id }}/{{ $live_id }}" class="btn btn-sm btn-danger">Delete</a>
                                     </div>
                                 </div>
                             </td>
@@ -68,25 +68,4 @@
         </div>
     </div>
 </div>
-
-<!--Modal-->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection

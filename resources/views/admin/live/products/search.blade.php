@@ -11,16 +11,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-4">
-                    Search List
+                    Search List with <strong>{{ $keyword }}</strong>
                 </div>
                 <div class="col-md-4">
-                    <form action="/search" method="get" class="form-inline">
-                        @csrf
-                        <div class="form-group mx-sm-3">
-                            <input type="text" class="form-control" name="query" placeholder="search">
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-sm">Search</button>
-                    </form>
+
                 </div>
                 <div class="col-md-4">
                     <a href="/lives" style="float: right" class="btn btn-primary btn-lg">Back</a>
@@ -48,13 +42,13 @@
                             <td>{{$product->phone_number}}</td>
                             <td>{{$product->url}}</td>
                             <td>
-                                <img src="{{ asset('uploads/images/' . $product->image) }}" height="100px" width="100px" alt="product image">
+                                <img src="{{ asset('storage/images/'.trim($product->image, '"')) }}" height="100px" width="100px" alt="">
                             </td>
                             <td>{{$product->quantity}}</td>
                             <td>
                                 <div class="row">
-                                    <div class="col-md-6"><a href="/order_confirm/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a></div>
-                                    <div class="col-md-6"><a href="/delete/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a></div>
+                                    <div class="col-md-6"><a href="/order_confirm/{{ $product->user_id }}/{{ $product->id }}" class="btn btn-primary btn-sm">Confirm</a></div>
+                                    <div class="col-md-6"><a href="/delete/{{ $product->user_id }}/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a></div>
                                 </div>
                             </td>
                         </tr>

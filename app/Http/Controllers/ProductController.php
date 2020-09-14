@@ -24,7 +24,7 @@ class ProductController extends Controller
 
             $extension = $key[0]->getClientOriginalExtension();
             $fileName = time() . '.' .$extension;
-            $key[0]->move('uploads/images/', $fileName);
+            $key[0]->move('storage/images/', $fileName);
             $product->image = $fileName;
 
             $product->live_id = Live::orderByDesc('id')->first()->id;

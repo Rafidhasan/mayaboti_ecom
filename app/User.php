@@ -41,6 +41,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->withTimeStamps();
     }
 
+    public function invoices() {
+        return $this->hasMany(Invoice::class)->withTimeStamps();
+    }
+
     public function getAcessAbilityId() {
         return $this->roles->map->abilities->flatten()->pluck('id')->first();
     }

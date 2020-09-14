@@ -13,21 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //admin routes
 Route::get('/admin', 'AdminController@index')->middleware('admin')->name('adminHome');
 Route::post('/live_start', 'LiveController@create')->middleware('admin');
 Route::get('/lives', 'LiveController@index')->middleware('admin')->name('live_list');
-Route::get('/lives/{id}', 'LiveController@show')->middleware('admin')->name('live_list');
-Route::get('/order_confirm/{id}', 'OrderController@show')->middleware('admin')->name('singleOrderPage');
+Route::get('/lives/{id}', 'LiveController@show')->middleware('admin');
 Route::get('/search', 'LiveController@search')->middleware('admin');
-
-
+Route::get('/delete/{product_id}/{live_id}', 'LiveController@delete')->middleware('admin');
+Route::get('/order_confirm/{user_id}/{products_id}', 'OrderController@show')->middleware('admin')->name('singleOrderPage');
+Route::post('/order_confirm/{user_id}','InvoiceController@create')->middleware('admin');
 //user routes
 Auth::routes();
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/products/{id}', 'ProductController@insert');
 

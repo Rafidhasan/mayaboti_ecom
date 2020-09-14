@@ -37,7 +37,7 @@ class LiveController extends Controller
 
         $products_user = DB::table('users')
             ->join('products', 'users.id', '=', 'products.user_id')
-            ->select('users.name', 'users.phone_number', 'users.address', 'url', 'products.id',  'products.image', 'products.quantity')
+            ->select('users.name', 'users.phone_number', 'users.address', 'url', 'products.id', 'products.user_id',  'products.image', 'products.quantity')
             ->where('products.live_id', '=', $request->id)
             ->oldest('products.created_at')
             ->get();
@@ -49,16 +49,30 @@ class LiveController extends Controller
         return view('admin.live.products', [
             'products_live' => $products_live,
             'products_user' => $products_user,
-            'live_name' => $live_name
+            'live_name' => $live_name,
+            'live_id' => $request->id
         ]);
     }
 
     public function search(Request $request) {
-        $text = $request->input('query');
-        $products = User::where('name', 'LIKE', '%'.$text.'%')->get();
+        $products = DB::table('users')
+            ->join('products', function ($join) use ($request) {
+                $join->on('users.id', '=', 'products.user_id')
+                    ->where('users.name', 'like', '%'.$request->input('query').'%');
+            })
+        ->get();
+
+        $keyword = $request->input('query');
 
         return view('admin.live.products.search', [
-            'products' => $products
+            'products' => $products,
+            'keyword' => $keyword
         ]);
+    }
+
+    public function delete(Request $request) {
+        DB::table('products')->where('id', '=', $request->product_id)->delete();
+
+        return redirect('/lives/'.$request->live_id)->with('status', 'Your order is deleted');
     }
 }

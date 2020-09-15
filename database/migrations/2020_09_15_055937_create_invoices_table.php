@@ -16,10 +16,11 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->decimal('price');
-            $table->string('quantity');
-            $table->decimal('total');
-            $table->decimal('discount')->nullable();
+            $table->string('serial');
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->integer('discount');
+            $table->integer('total');
             $table->timestamps();
 
             $table->foreign('user_id')

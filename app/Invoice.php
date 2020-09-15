@@ -7,15 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     protected $fillable = [
-        'discount', 'user_id', 'total'
+        'image', 'quantity', 'user_id'
     ];
 
-    protected $casts = [
-        'quantity' => 'array',
-        'price' => 'array',
-    ];
-
-    public function users() {
-        return $this->belongsTo(User::class)->withTimeStamps();
-    }
+    protected $casts = ['image' => 'array'];
 }

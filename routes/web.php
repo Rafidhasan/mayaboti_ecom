@@ -22,6 +22,7 @@ Route::get('/search', 'LiveController@search')->middleware('admin');
 Route::get('/delete/{product_id}/{live_id}', 'LiveController@delete')->middleware('admin');
 Route::get('/order_confirm/{user_id}/{products_id}', 'OrderController@show')->middleware('admin')->name('singleOrderPage');
 Route::post('/order_confirm/{user_id}','InvoiceController@create')->middleware('admin');
+Route::get('/showInvoice/{user_id}/{serial}','InvoiceController@show')->middleware('admin');
 //user routes
 Auth::routes();
 Route::get('/', function () {
